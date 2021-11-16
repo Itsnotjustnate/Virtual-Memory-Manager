@@ -1,3 +1,92 @@
+//  
+//  memmgr.c
+//
+//  memmgr
+//  Created by Nathan Eduvala
+//
+//  Copyright © 2020 William McCarthy. All rights reserved.
+//
+//  ===       Start of Code       ===
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <assert.h>
+#include <stdbool.h>
+
+#define ARGC_ERROR 1
+#define FILE_ERROR 2
+#define BUFLEN 256
+#define FRAME_SIZE 256
+
+typedef struct {
+  unsigned page_number;
+  unsigned frame_number;
+} TLB;
+
+typedef struct {
+} PT_entry;
+
+int main() {
+
+  FILE* fadd = fopen("addresses.txt", "r");
+  if (fadd == NULL) {
+    fprintf(stderr, "Could not open file: 'addresses.txt'\n");
+    exit(FILE_ERROR);
+  }
+
+  FILE* fcorr = fopen("correct.txt", "r");
+  if (fcorr == NULL) {
+    fprintf(stderr, "Could not open file: 'correct.txt'\n");
+    exit(FILE_ERROR);
+  }
+
+  FILE* fback = fopen("BACKING_STORE.bin", "rb");
+  if (fback == NULL) {
+    fprintf(stderr, "Could not open file: 'BACKING_STORE.bin'");
+    exit(FILE_ERROR);
+  }
+
+  char buf[BUFLEN];
+  unsigned address;
+  unsigned page_size;
+  unsigned page_number;
+  unsigned offset;
+  unsigned frame;
+  unsigned physical_base;
+  unsigned physical_total;
+  unsigned value;
+
+  printf("ONLY READ FIRST 20 entries -- TODO: change to read all entries\n\n");
+
+  for(int i = 0;i < 1000; i++) {
+    fscanf(fadd, "%d", &address);
+  }
+  printf("%3d", address);
+
+  //calculations for each
+  //addy comes from addresses
+  //page_size is finite?
+  //page number is addy / page size
+  //offset is (addy - page number) * page_size
+  //frame is something
+  //frame * page size is something (physical base address)
+  //physical total address is something
+  //value is somethin
+
+
+
+
+
+  fclose(fback);
+  fclose(fcorr);
+  fclose(fadd);
+
+  printf("Hello world!");
+  return 0;
+}
+
+
 //
 //  memmgr.c
 //  memmgr
@@ -240,25 +329,3 @@ int main(int argc, const char* argv[]) {
 
 */
 
-//  
-//  memmgr.c
-//
-//  memmgr
-//  Created by Nathan Eduvala
-//
-//  Copyright © 2020 William McCarthy. All rights reserved.
-//
-//  ===       Start of Code       ===
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <assert.h>
-#include <stdbool.h>
-
-#define FILE_ERROR 2
-
-int main() {
-  printf("Hello world!");
-  return 0;
-}
