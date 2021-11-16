@@ -49,20 +49,38 @@ int main() {
 
   char buf[BUFLEN];
   unsigned address;
+  unsigned page;
   unsigned page_size;
   unsigned page_number;
   unsigned offset;
-  unsigned frame;
+  unsigned frame = 0;
   unsigned physical_base;
   unsigned physical_total;
   unsigned value;
 
   printf("ONLY READ FIRST 20 entries -- TODO: change to read all entries\n\n");
 
+  //need to save address, page, offset
+  //frame starts at 0 and increments over time
   for(int i = 0;i < 1000; i++) {
+    //scans in the addresses from address.txt
     fscanf(fadd, "%d", &address);
+
+    //gets the address and divides it by 2^8
+    page_number = (0xff00 & address) >> 8;
+
+    //gets the offset by address - page_number * page_size(2^8)
+    offset = (0xff & address);
+
+    //physical base or frame * page_size is
+
+
+    printf("%3d\n", physical_base);
+    frame++;
+  
   }
-  printf("%3d", address);
+
+
 
   //calculations for each
   //addy comes from addresses
